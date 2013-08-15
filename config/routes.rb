@@ -1,6 +1,16 @@
 Ib2test::Application.routes.draw do
-  resources :students
+  
+  #不要なルートを削除  
+  #studentsにCRUD以外のルートを設定
 
+  resources :students, :except => %w[create update] do
+    member do
+      get 'profileconfirm'
+    end
+    collection do
+      get 'profilecomplete'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -58,4 +68,5 @@ Ib2test::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+
 end
